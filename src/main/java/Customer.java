@@ -3,7 +3,6 @@ import java.util.*;
 public class Customer {
     private final String name;
     private final List<Rental> rentals = new ArrayList<Rental>();
-    private double amountOwed;
     private int earnedFrequentRenterPoints;
 
     public Customer(String name) {
@@ -31,22 +30,17 @@ public class Customer {
     }
 
     public String statement() {
-        amountOwed = 0;
         earnedFrequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
         for (Rental rental : rentals) {
-            double thisAmount = rentalAmount(rental);
-
             earnedFrequentRenterPoints++;
 
             if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
                 earnedFrequentRenterPoints++;
             }
 
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
-            amountOwed += thisAmount;
-
+            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rentalAmount(rental)) + "\n";
         }
 
         result += "You owed " + String.valueOf(amountOwed()) + "\n";
