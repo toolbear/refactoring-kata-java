@@ -3,6 +3,7 @@ import java.util.*;
 public class Customer {
     private final String name;
     private final List<Rental> rentals = new ArrayList<Rental>();
+    private double amountOwed;
 
     public Customer(String name) {
         this.name = name;
@@ -16,8 +17,12 @@ public class Customer {
         return name;
     }
 
+    public double amountOwed() {
+        return amountOwed;
+    }
+
     public String statement() {
-        double totalAmount = 0;
+        amountOwed = 0;
         int frequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
@@ -50,14 +55,13 @@ public class Customer {
             }
 
             result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
-            totalAmount += thisAmount;
+            amountOwed += thisAmount;
 
         }
 
-        result += "You owed " + String.valueOf(totalAmount) + "\n";
+        result += "You owed " + String.valueOf(amountOwed) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
 
         return result;
     }
-
 }

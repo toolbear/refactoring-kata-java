@@ -18,9 +18,9 @@ public class VideoStoreTest {
     }
 
     @Test
-    @Ignore
     public void singleNewReleaseAmountOwed() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
+        customer.statement();
         assertThat(customer.amountOwed(), is(9.0));
     }
 
