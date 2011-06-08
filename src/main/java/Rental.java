@@ -16,10 +16,11 @@ public class Rental {
     }
 
     double amount() {
-        double thisAmount = 0;
+        return amount(getMovie(), getDaysRented());
+    }
 
-        Movie movie = getMovie();
-        int daysRented = getDaysRented();
+    private double amount(Movie movie, int daysRented) {
+        double thisAmount = 0;
         switch (movie.getPriceCode()) {
             case Movie.REGULAR:
                 thisAmount += 2;
