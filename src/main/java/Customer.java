@@ -19,7 +19,7 @@ public class Customer {
     public double amountOwed() {
         double amountOwed = 0;
         for (Rental rental : rentals) {
-            amountOwed += rentalAmount(rental);
+            amountOwed += rental.amount();
         }
         return amountOwed;
     }
@@ -27,7 +27,7 @@ public class Customer {
     public int earnedFrequentRenterPoints() {
         int earned = 0;
         for (Rental rental : rentals) {
-            earned += frequentRenterPoints(rental);
+            earned += rental.frequentRenterPoints();
         }
         return earned;
     }
@@ -49,39 +49,11 @@ public class Customer {
     }
 
     private String statementLineItem(Rental rental) {
-        return "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rentalAmount(rental)) + "\n";
+        return "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.amount()) + "\n";
     }
 
     private String statementFooter() {
         return "You owed " + String.valueOf(amountOwed()) + "\n" + "You earned "
                + String.valueOf(earnedFrequentRenterPoints()) + " frequent renter points\n";
-    }
-
-    private int frequentRenterPoints(Rental rental) {
-        if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) return 2;
-        else return 1;
-    }
-
-    private double rentalAmount(Rental rental) {
-        double thisAmount = 0;
-
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (rental.getDaysRented() > 2) {
-                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
-                }
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (rental.getDaysRented() > 3) {
-                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                }
-                break;
-        }
-        return thisAmount;
     }
 }
