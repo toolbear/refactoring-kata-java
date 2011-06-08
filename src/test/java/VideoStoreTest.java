@@ -62,7 +62,25 @@ public class VideoStoreTest {
     }
 
     @Test
-    public void testMultipleRegularStatement() {
+    public void multipleRegularAmountOwed() {
+        customer.addRental(new Rental(REGULAR_MOVIE_1, 1));
+        customer.addRental(new Rental(REGULAR_MOVIE_2, 2));
+        customer.addRental(new Rental(REGULAR_MOVIE_3, 3));
+        customer.statement();
+        assertThat(customer.amountOwed(), is(7.5));
+    }
+
+    @Test
+    public void multipleRegularEarnedFrequentRenterPoints() {
+        customer.addRental(new Rental(REGULAR_MOVIE_1, 1));
+        customer.addRental(new Rental(REGULAR_MOVIE_2, 2));
+        customer.addRental(new Rental(REGULAR_MOVIE_3, 3));
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(3));
+    }
+
+    @Test
+    public void multipleRegularStatement() {
         customer.addRental(new Rental(REGULAR_MOVIE_1, 1));
         customer.addRental(new Rental(REGULAR_MOVIE_2, 2));
         customer.addRental(new Rental(REGULAR_MOVIE_3, 3));
@@ -71,5 +89,4 @@ public class VideoStoreTest {
                              + "\tEraserhead\t3.5\n" + "You owed 7.5\n" + "You earned 3 frequent renter points\n",
                      customer.statement());
     }
-
 }
