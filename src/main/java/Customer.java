@@ -19,6 +19,10 @@ public class Customer {
     }
 
     public double amountOwed() {
+        double amountOwed = 0;
+        for (Rental rental : rentals) {
+            amountOwed += rentalAmount(rental);
+        }
         return amountOwed;
     }
 
@@ -45,7 +49,7 @@ public class Customer {
 
         }
 
-        result += "You owed " + String.valueOf(amountOwed) + "\n";
+        result += "You owed " + String.valueOf(amountOwed()) + "\n";
         result += "You earned " + String.valueOf(earnedFrequentRenterPoints) + " frequent renter points\n";
 
         return result;
@@ -54,7 +58,6 @@ public class Customer {
     private double rentalAmount(Rental rental) {
         double thisAmount = 0;
 
-        // determines the amount for each line
         switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
                 thisAmount += 2;
