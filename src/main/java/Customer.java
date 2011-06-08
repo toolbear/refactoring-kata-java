@@ -31,35 +31,16 @@ public class Customer {
         earnedFrequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
-        for (Rental each : rentals) {
-            double thisAmount = 0;
-
-            // determines the amount for each line
-            switch (each.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.getDaysRented() > 2) {
-                        thisAmount += (each.getDaysRented() - 2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.getDaysRented() > 3) {
-                        thisAmount += (each.getDaysRented() - 3) * 1.5;
-                    }
-                    break;
-            }
+        for (Rental rental : rentals) {
+            double thisAmount = rentalAmount(rental);
 
             earnedFrequentRenterPoints++;
 
-            if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE && each.getDaysRented() > 1) {
+            if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
                 earnedFrequentRenterPoints++;
             }
 
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
             amountOwed += thisAmount;
 
         }
@@ -68,5 +49,29 @@ public class Customer {
         result += "You earned " + String.valueOf(earnedFrequentRenterPoints) + " frequent renter points\n";
 
         return result;
+    }
+
+    private double rentalAmount(Rental rental) {
+        double thisAmount = 0;
+
+        // determines the amount for each line
+        switch (rental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (rental.getDaysRented() > 2) {
+                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += rental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                thisAmount += 1.5;
+                if (rental.getDaysRented() > 3) {
+                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                }
+                break;
+        }
+        return thisAmount;
     }
 }
