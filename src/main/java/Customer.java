@@ -33,15 +33,15 @@ public class Customer {
     }
 
     public String statement() {
-        String result = statementHeader();
+        StringBuilder statement = new StringBuilder(statementHeader());
 
         for (Rental rental : rentals) {
-            result += statementLineItem(rental);
+            statement.append(statementLineItem(rental));
         }
 
-        result += statementFooter();
+        statement.append(statementFooter());
 
-        return result;
+        return statement.toString();
     }
 
     private String statementHeader() {
@@ -54,7 +54,7 @@ public class Customer {
 
     private String statementFooter() {
         return "You owed " + String.valueOf(amountOwed()) + "\n" + "You earned "
-                  + String.valueOf(earnedFrequentRenterPoints()) + " frequent renter points\n";
+               + String.valueOf(earnedFrequentRenterPoints()) + " frequent renter points\n";
     }
 
     private int frequentRenterPoints(Rental rental) {
