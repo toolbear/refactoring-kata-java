@@ -20,7 +20,6 @@ public class VideoStoreTest {
     @Test
     public void singleNewReleaseAmountOwed() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
-        customer.statement();
         assertThat(customer.amountOwed(), is(9.0));
     }
 
@@ -35,7 +34,6 @@ public class VideoStoreTest {
     public void dualNewReleaseAmountOwed() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
         customer.addRental(new Rental(NEW_RELEASE_2, 3));
-        customer.statement();
         assertThat(customer.amountOwed(), is(18.0));
     }
 
@@ -50,7 +48,6 @@ public class VideoStoreTest {
     @Test
     public void singleChildrensAmountOwed() {
         customer.addRental(new Rental(CHILDRENS_MOVIE, 3));
-        customer.statement();
         assertThat(customer.amountOwed(), is(1.5));
     }
 
@@ -66,7 +63,6 @@ public class VideoStoreTest {
         customer.addRental(new Rental(REGULAR_MOVIE_1, 1));
         customer.addRental(new Rental(REGULAR_MOVIE_2, 2));
         customer.addRental(new Rental(REGULAR_MOVIE_3, 3));
-        customer.statement();
         assertThat(customer.amountOwed(), is(7.5));
     }
 
