@@ -32,11 +32,19 @@ public class VideoStoreTest {
     }
 
     @Test
-    public void testDualNewReleaseStatement() {
+    public void dualNewReleaseAmountOwed() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
         customer.addRental(new Rental(NEW_RELEASE_2, 3));
-        assertEquals("Rental Record for Fred\n" + "\tThe Cell\t9.0\n" + "\tThe Tigger Movie\t9.0\n" + "You owed 18.0\n"
-                     + "You earned 4 frequent renter points\n", customer.statement());
+        customer.statement();
+        assertThat(customer.amountOwed(), is(18.0));
+    }
+
+    @Test
+    public void dualNewReleaseEarnedFrequentRenterPoints() {
+        customer.addRental(new Rental(NEW_RELEASE_1, 3));
+        customer.addRental(new Rental(NEW_RELEASE_2, 3));
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(4));
     }
 
     @Test
