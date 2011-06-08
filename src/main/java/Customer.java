@@ -4,6 +4,7 @@ public class Customer {
     private final String name;
     private final List<Rental> rentals = new ArrayList<Rental>();
     private double amountOwed;
+    private int earnedFrequentRenterPoints;
 
     public Customer(String name) {
         this.name = name;
@@ -21,9 +22,13 @@ public class Customer {
         return amountOwed;
     }
 
+    public int earnedFrequentRenterPoints() {
+        return earnedFrequentRenterPoints;
+    }
+
     public String statement() {
         amountOwed = 0;
-        int frequentRenterPoints = 0;
+        earnedFrequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
         for (Rental each : rentals) {
@@ -48,10 +53,10 @@ public class Customer {
                     break;
             }
 
-            frequentRenterPoints++;
+            earnedFrequentRenterPoints++;
 
             if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE && each.getDaysRented() > 1) {
-                frequentRenterPoints++;
+                earnedFrequentRenterPoints++;
             }
 
             result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
@@ -60,7 +65,7 @@ public class Customer {
         }
 
         result += "You owed " + String.valueOf(amountOwed) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
+        result += "You earned " + String.valueOf(earnedFrequentRenterPoints) + " frequent renter points\n";
 
         return result;
     }
