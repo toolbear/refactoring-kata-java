@@ -26,7 +26,11 @@ public class Customer {
     }
 
     public int earnedFrequentRenterPoints() {
-        return earnedFrequentRenterPoints;
+        int earned = 0;
+        for (Rental rental : rentals) {
+            earned += frequentRenterPoints(rental);
+        }
+        return earned;
     }
 
     public String statement() {
@@ -46,11 +50,8 @@ public class Customer {
     }
 
     private int frequentRenterPoints(Rental rental) {
-        if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
-            return 2;
-        } else {
-            return 1;
-        }
+        if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) return 2;
+        else return 1;
     }
 
     private double rentalAmount(Rental rental) {

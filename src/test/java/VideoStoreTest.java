@@ -26,7 +26,6 @@ public class VideoStoreTest {
     @Test
     public void singleNewReleaseEarnedFrequentRenterPoints() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
-        customer.statement();
         assertThat(customer.earnedFrequentRenterPoints(), is(2));
     }
 
@@ -41,7 +40,6 @@ public class VideoStoreTest {
     public void dualNewReleaseEarnedFrequentRenterPoints() {
         customer.addRental(new Rental(NEW_RELEASE_1, 3));
         customer.addRental(new Rental(NEW_RELEASE_2, 3));
-        customer.statement();
         assertThat(customer.earnedFrequentRenterPoints(), is(4));
     }
 
@@ -54,7 +52,6 @@ public class VideoStoreTest {
     @Test
     public void singleChildrensEarnedFrequentRenterPoints() {
         customer.addRental(new Rental(CHILDRENS_MOVIE, 3));
-        customer.statement();
         assertThat(customer.earnedFrequentRenterPoints(), is(1));
     }
 
@@ -71,7 +68,6 @@ public class VideoStoreTest {
         customer.addRental(new Rental(REGULAR_MOVIE_1, 1));
         customer.addRental(new Rental(REGULAR_MOVIE_2, 2));
         customer.addRental(new Rental(REGULAR_MOVIE_3, 3));
-        customer.statement();
         assertThat(customer.earnedFrequentRenterPoints(), is(3));
     }
 
