@@ -3,7 +3,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class VideoStoreTest {
@@ -21,10 +20,10 @@ public class VideoStoreTest {
         customer = new Customer ("Fred");
     }
 
-    @Ignore
     @Test
     public void singleNewReleaseAmountOwed() throws Exception {
         customer.addRental (new Rental (NEW_RELEASE_1, 3));
+        customer.statement();
         assertThat(customer.amountOwed(), is(9.0));
     }
 
