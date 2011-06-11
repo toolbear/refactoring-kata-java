@@ -35,11 +35,14 @@ public class Customer {
         String              result                  = "Rental Record for " + getName () + "\n";
 
         for (Rental rental : rentals) {
-            earnedFrequentRenterPoints++;
-
+            int frequentRenterPoints;
             if (rental.getMovie ().getPriceCode () == Movie.NEW_RELEASE
-                    && rental.getDaysRented () > 1)
-                earnedFrequentRenterPoints++;
+                    && rental.getDaysRented () > 1) {
+                frequentRenterPoints = 2;
+            } else {
+                frequentRenterPoints = 1;
+            }
+            earnedFrequentRenterPoints += frequentRenterPoints;
 
             result += "\t" + rental.getMovie ().getTitle () + "\t"
                                 + String.valueOf (rentalAmount(rental)) + "\n";
