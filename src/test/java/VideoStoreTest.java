@@ -28,12 +28,10 @@ public class VideoStoreTest {
     }
 
     @Test
-    public void testSingleNewReleaseStatement () {
+    public void singleNewReleaseEarnedFrequentRenterPoints() throws Exception {
         customer.addRental (new Rental (NEW_RELEASE_1, 3));
-        assertEquals ("Rental Record for Fred\n" +
-                "\tThe Cell\t9.0\n" +
-                "You owed 9.0\n" +
-                "You earned 2 frequent renter points\n", customer.statement ());
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(2));
     }
 
     @Test
