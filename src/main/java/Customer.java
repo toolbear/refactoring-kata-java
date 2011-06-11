@@ -4,7 +4,6 @@ import java.util.List;
 public class Customer {
     private String name;
     private List<Rental> rentals = new ArrayList<Rental>();
-    private double amountOwed;
     private int earnedFrequentRenterPoints;
 
     public Customer (String name) {
@@ -20,6 +19,10 @@ public class Customer {
     }
 
     public double amountOwed() {
+        double amountOwed = 0;
+        for (Rental rental : rentals) {
+            amountOwed += rentalAmount(rental);
+        }
         return amountOwed;
     }
 
@@ -28,13 +31,10 @@ public class Customer {
     }
 
     public String statement () {
-        amountOwed = 0;
         earnedFrequentRenterPoints = 0;
         String              result                  = "Rental Record for " + getName () + "\n";
 
         for (Rental rental : rentals) {
-            double thisAmount = rentalAmount(rental);
-
             earnedFrequentRenterPoints++;
 
             if (rental.getMovie ().getPriceCode () == Movie.NEW_RELEASE
@@ -42,12 +42,10 @@ public class Customer {
                 earnedFrequentRenterPoints++;
 
             result += "\t" + rental.getMovie ().getTitle () + "\t"
-                                + String.valueOf (thisAmount) + "\n";
-            amountOwed += thisAmount;
-
+                                + String.valueOf (rentalAmount(rental)) + "\n";
         }
 
-        result += "You owed " + String.valueOf (amountOwed) + "\n";
+        result += "You owed " + String.valueOf (amountOwed()) + "\n";
         result += "You earned " + String.valueOf (earnedFrequentRenterPoints) + " frequent renter points\n";
 
 
