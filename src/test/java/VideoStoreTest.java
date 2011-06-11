@@ -35,27 +35,55 @@ public class VideoStoreTest {
     }
 
     @Test
-    public void testDualNewReleaseStatement () {
+    public void dualNewReleaseAmountOwed() throws Exception {
         customer.addRental (new Rental (NEW_RELEASE_1, 3));
         customer.addRental (new Rental (NEW_RELEASE_2, 3));
-        assertEquals ("Rental Record for Fred\n" +
-                "\tThe Cell\t9.0\n" +
-                "\tThe Tigger Movie\t9.0\n" +
-                "You owed 18.0\n" +
-                "You earned 4 frequent renter points\n", customer.statement ());
+        customer.statement();
+        assertThat(customer.amountOwed(), is(18.0));
     }
 
     @Test
-    public void testSingleChildrensStatement () {
+    public void dualNewReleaseEarnedFrequentRenterPoints() throws Exception {
+        customer.addRental (new Rental (NEW_RELEASE_1, 3));
+        customer.addRental (new Rental (NEW_RELEASE_2, 3));
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(4));
+    }
+
+    @Test
+    public void singleChildrensAmountOwed() throws Exception {
         customer.addRental (new Rental (CHILDRENS_MOVIE, 3));
-        assertEquals ("Rental Record for Fred\n" +
-                "\tThe Tigger Movie\t1.5\n" +
-                "You owed 1.5\n" +
-                "You earned 1 frequent renter points\n", customer.statement ());
+        customer.statement();
+        assertThat(customer.amountOwed(), is(1.5));
     }
 
     @Test
-    public void testMultipleRegularStatement () {
+    public void singleChildrensEarnedFrequentRenterPoints() throws Exception {
+        customer.addRental (new Rental (CHILDRENS_MOVIE, 3));
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(1));
+    }
+
+    @Test
+    public void multipleRegularAmountOwed() throws Exception {
+        customer.addRental (new Rental (REGULAR_MOVIE_1, 1));
+        customer.addRental (new Rental (REGULAR_MOVIE_2, 2));
+        customer.addRental (new Rental (REGULAR_MOVIE_3, 3));
+        customer.statement();
+        assertThat(customer.amountOwed(), is(7.5));
+    }
+
+    @Test
+    public void multipleRegularEarnedFrequentRenterPoints() throws Exception {
+        customer.addRental (new Rental (REGULAR_MOVIE_1, 1));
+        customer.addRental (new Rental (REGULAR_MOVIE_2, 2));
+        customer.addRental (new Rental (REGULAR_MOVIE_3, 3));
+        customer.statement();
+        assertThat(customer.earnedFrequentRenterPoints(), is(3));
+    }
+
+    @Test
+    public void multipleRegularStatement () {
         customer.addRental (new Rental (REGULAR_MOVIE_1, 1));
         customer.addRental (new Rental (REGULAR_MOVIE_2, 2));
         customer.addRental (new Rental (REGULAR_MOVIE_3, 3));
