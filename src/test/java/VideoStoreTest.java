@@ -11,7 +11,7 @@ public class VideoStoreTest {
     private static final Movie REGULAR_MOVIE_1 = new Movie ("Plan 9 from Outer Space", Movie.REGULAR);
     private static final Movie REGULAR_MOVIE_2 = new Movie ("8 1/2", Movie.REGULAR);
     private static final Movie REGULAR_MOVIE_3 = new Movie ("Eraserhead", Movie.REGULAR);
-    private static final Movie CHILDRENS_MOVIE = new Movie ("The Tigger Movie", Movie.CHILDRENS);
+    private static final Movie CHILDRENS_MOVIE = new ChildrensMovie ("The Tigger Movie");
 
     private Customer customer;
 
