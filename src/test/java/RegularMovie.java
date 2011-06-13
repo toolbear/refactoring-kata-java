@@ -5,4 +5,8 @@ public class RegularMovie extends Movie {
         super(title, Movie.REGULAR);
     }
 
+    @Override
+    int frequentRenterPoints(int daysRented) {
+        return 1;
+    }
 }
