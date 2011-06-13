@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class VideoStoreTest {
-    private static final Movie NEW_RELEASE_1 = new Movie ("The Cell", Movie.NEW_RELEASE);
-    private static final Movie NEW_RELEASE_2 = new Movie ("The Tigger Movie", Movie.NEW_RELEASE);
-    private static final Movie REGULAR_MOVIE_1 = new Movie ("Plan 9 from Outer Space", Movie.REGULAR);
-    private static final Movie REGULAR_MOVIE_2 = new Movie ("8 1/2", Movie.REGULAR);
-    private static final Movie REGULAR_MOVIE_3 = new Movie ("Eraserhead", Movie.REGULAR);
+    private static final Movie NEW_RELEASE_1 = new NewReleaseMovie ("The Cell");
+    private static final Movie NEW_RELEASE_2 = new NewReleaseMovie ("The Tigger Movie");
+    private static final Movie REGULAR_MOVIE_1 = new RegularMovie ("Plan 9 from Outer Space");
+    private static final Movie REGULAR_MOVIE_2 = new RegularMovie ("8 1/2");
+    private static final Movie REGULAR_MOVIE_3 = new RegularMovie ("Eraserhead");
     private static final Movie CHILDRENS_MOVIE = new ChildrensMovie ("The Tigger Movie");
 
     private Customer customer;
