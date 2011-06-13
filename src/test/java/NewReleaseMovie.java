@@ -1,4 +1,3 @@
-
 public class NewReleaseMovie extends Movie {
 
     public NewReleaseMovie(String title) {
@@ -12,5 +11,10 @@ public class NewReleaseMovie extends Movie {
         } else {
             return 1;
         }
+    }
+
+    @Override
+    protected double amount(int daysRented) {
+        return (double) (daysRented * 3);
     }
 }
